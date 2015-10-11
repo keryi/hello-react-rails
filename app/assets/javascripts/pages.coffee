@@ -1,18 +1,14 @@
-$ ->
-  link_clicked = (e) ->
-    React.render(virtual_dom_after_click, document.body)
-
-  virtual_dom_after_click = React.DOM.div(
-    {},
-    React.DOM.span({}, 'You clicked the link!')
-  )
-
-  virtual_dom_before_click = React.DOM.div(
-    { id: 'welcome' },
-    React.DOM.a(
-      { href: 'javascript:void(0)', id: 'btn_welcome', onClick: link_clicked },
-      'Click me'
+OneTimeClickLink = React.createClass
+  render: ->
+    React.DOM.div(
+      { className: 'one-time-click-link' },
+      React.DOM.a(
+        { href: 'javascript:void(0)' },
+        'Click!'
+      )
     )
-  )
 
-  React.render(virtual_dom_before_click, document.body)
+$ ->
+  otc_link = React.createElement(OneTimeClickLink)
+
+  React.render(otc_link, document.body)
