@@ -6,20 +6,14 @@ OneTimeClickLink = React.createClass
     @setState(clicked: true)
     console.log 'Click click!!'
 
+  child: ->
+    {
+      false: React.DOM.a({ href: 'javascript:void(0)', onClick: @link_clicked }, 'Click'),
+      true: React.DOM.span({}, 'You have clicked the link!')
+    }[@state.clicked]
+
   render: ->
-    unless @state.clicked
-      React.DOM.div(
-        { className: 'one-time-click-link' },
-        React.DOM.a(
-          { href: 'javascript:void(0)', onClick: @link_clicked },
-          'Click!'
-        )
-      )
-    else
-      React.DOM.div(
-        { className: 'one-time-clicked-link' },
-        React.DOM.span({}, 'Link has been clicked')
-      )
+    React.DOM.div({ className: 'one-time-click-link' }, @child())
 
 $ ->
   otc_link = React.createFactory(OneTimeClickLink)
